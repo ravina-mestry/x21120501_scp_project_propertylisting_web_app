@@ -1,0 +1,10 @@
+# Python
+__pycache__
+
+# Django
+db.sqlite3
+
+# Elastic Beanstalk Files
+#.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

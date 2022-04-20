@@ -1,0 +1,18 @@
+branch-defaults:
+  default:
+    environment: x21120501-scp-project-proplisting-env
+    group_suffix: null
+global:
+  application_name: x21120501_scp_project_propertylisting_web_app
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Python 3.7
+  default_region: eu-west-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} Receipt Update {% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;">Update Receipt</h1>
+    
+    <a href="/properties/profile/{{ propertyId }}/">Go Back</a>
+    </br></br>
+
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">Expense:</label>
+            <input type="text" name="name" maxlength="64" required="" id="id_name" class="form-control" value="{{ receipt.name }}">
+        </div>
+        <div class="form-group">
+            <label for="id_date_receipt">Date Receipt:</label>
+            <input type="text" name="date_receipt" maxlength="64" required="" id="id_date_receipt" class="form-control" value="{{ receipt.date_receipt }}">
+        </div>
+        <div class="form-group">
+            <label for="id_merchant_name">Merchant:</label>
+            <input type="text" name="merchant_name" maxlength="64" required="" id="id_merchant_name" class="form-control" value="{{ receipt.merchant_name }}">
+        </div>
+        <div class="form-group">
+            <label for="id_amount_total">Amount:</label>
+            <input type="text" name="amount_total" maxlength="64" required="" id="id_amount_total" class="form-control" value="{{ receipt.amount_total }}">
+        </div>
+        <input type="hidden" name="user" id="id_user" value="{{ receipt.user }}">
+        <input type="hidden" name="user_email" id="id_user_email" value="{{ receipt.user_email }}">
+        <hr>
+        <div class="form-group">
+            <button type="submit" class="btn btn-orange btn-block">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

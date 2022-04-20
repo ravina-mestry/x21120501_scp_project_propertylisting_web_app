@@ -1,0 +1,64 @@
+{% extends "base.html" %} 
+{% load staticfiles %}
+{% block scripts_top %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  		<link rel="stylesheet" href="{% static "css/maps/mapstyle.css" %}">
+{% endblock %}
+
+{% block title %} Property List {% endblock %}
+{% block content %}
+<div class="container_div">
+      <div clas="row">
+        <div class="col-lg-6 col-md-6 col-xs-6 margin-top-1">Page:
+              
+                {% for page in property_page.paginator.page_range %}
+                  <a href = "?page={{ page }}" class="page_link {% if property_page.number == page  %}active{% endif %}">{{ page }}</a>
+                {% endfor %}
+              
+        </div>
+        <hr>
+      </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="COGNITO-data" class="card-deck row">
+              {% for property in property_page %}
+                  <div class="col-lg-6 col-md-6 col-xs-12 margin-top-1">
+                    <a href="/properties/profile/{{property.id}}">
+                      <div class="card h-100">
+                        <div class="card-header">
+                          <i class="fa fa-address-card fa-5x fa-align-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="card-body">
+                          <h4 class="card-title">{{property.street_address}}</h4>
+                          <ul>
+                            <li><span class="card_attr">COUNTY: </span>{{property.county}}</li>
+                            <li><span class="card_attr">BEDROOMS: </span>{{property.bedrooms}}</li>
+                            <li><span class="card_attr">TYPE: </span>{{property.property_type}}</li>
+                            <li><span class="card_attr">PRICE: </span>{{property.price}}</li>
+                            <li><span class="card_attr">LISTING: </span>{{property.listing_type}}</li>
+                            <li class="li_lat_long"><span class="card_attr card_lat_long">{{property.latitude}},{{property.longitude}},/properties/profile/{{property.id}}</span></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </div>  
+              {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin-top-1">
+          <p>**Click on map markers to view property profile</p>
+          <hr>
+          <div id="map"></div>
+        </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts_bottom %}
+    <script src="{% static "js/maps/map_constants.js" %}"></script>
+    <script src="{% static "js/maps/map_load.js" %}"></script>
+    <script src="{% static "js/maps/map_prepare_property_list.js" %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKm2m-HpnwNxqkG7g9pyw-BpQ4Hw02hL4&callback=map_prepare_clients&v=weekly" async></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+  height: 600px;
+  width:600px;
+}
+
+.form-control {
+    margin-bottom: 1em;
+}
+
+.li_lat_long{
+  display:none;
+}
+
+#mapouter{
+  margin-top: 1em;
+}

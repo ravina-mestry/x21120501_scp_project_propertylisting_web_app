@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+{% load staticfiles %}
+{% block scripts_top %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  	<link rel="stylesheet" href="{% static "css/maps/mapstyle.css" %}">
+{% endblock %}
+
+{% block title %} Login Form {% endblock %}
+{% block content %}
+    
+
+    <div class="container">
+        <div id = "spacer">
+            &nbsp;
+        </div>
+        
+        <div class="jumbotron">
+          <h1 class="display-4">Buy and Sell Property</h1>
+          <p class="lead">Our Experts provide a wide range of commercial and residential real estate services to occupiers, owners and investors</p>
+          <hr class="my-4">
+          <p>We off a broad range of real estate services</p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'properties:listings' %}" role="button">Check Listings</a>
+          </p>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block scripts_bottom %}
+{% endblock %}

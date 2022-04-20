@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+{% load staticfiles %}
+{% block scripts_top %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  		<link rel="stylesheet" href="{% static "css/maps/mapstyle.css" %}">
+  		<link rel="stylesheet" href="{% static "css/property/add_property.css" %}">
+{% endblock %}
+{% block title %} Add a Client {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div>
+      <h1 class="display-4">{{heading}}</h1>
+    </div>
+    <a href="{% url 'properties:listings' %}">Go Back</a>
+    <hr>
+    <div id="Property-data" class="card-deck row">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-xs-12 margin-top-1">
+            <form id="property_add_form" action="{% url 'properties:add_property_listing' %}" method="POST">
+              {% csrf_token %}
+              {{ form }}
+              <hr>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-orange btn-block">Create</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6 col-md-6 col-xs-12 margin-top-1">
+            <p>**Click on map or drag marker to Client Location</p>
+            <hr>
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts_bottom %}
+    <script src="{% static "js/maps/map_constants.js" %}"></script>
+    <script src="{% static "js/maps/map_load.js" %}"></script>
+    <script src="{% static "js/maps/map_prepare_property_add.js" %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKm2m-HpnwNxqkG7g9pyw-BpQ4Hw02hL4&callback=map_prepare_clients&v=weekly" async></script>
+
+{% endblock %}
+    

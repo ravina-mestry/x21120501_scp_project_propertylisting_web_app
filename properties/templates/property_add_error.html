@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% block title %} Property Add Error {% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div>
+      <h1 class="display-4">{{heading}}</h1>
+    </div>
+    <a href="{% url 'properties:listings' %}">Go Back</a> | <a href="{% url 'properties:add_property_listing' %}">Add a Property</a>
+    <hr>
+    <div id="COGNITO-data" class="card-deck row">
+
+      <p>An error Occurred in adding to The Database. Please try again</p>
+
+   </div>
+  
+  
+</div>
+
+{% endblock %}

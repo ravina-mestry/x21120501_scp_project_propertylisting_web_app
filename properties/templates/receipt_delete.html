@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} Receipt Delete {% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;">Delete Receipt</h1>
+    
+    <a href="/properties/profile/{{ propertyId }}/">Go Back</a>
+    </br></br>
+
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if not isSubmitted %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="alert alert-info" role="alert">
+            Are you sure you want to delete receipt {{ receipt.name }} for {{ receipt.amount_total }} ?
+        </div>
+        <hr>
+        <div class="form-group">
+            <button type="submit" class="btn btn-orange btn-block">Delete</button>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

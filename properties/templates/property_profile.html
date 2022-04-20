@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts_top %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" href="{% static "css/maps/mapstyle.css" %}">
+{% endblock %}
+{% block title %} Profile Page {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="spacer margin-top-1 margin-bottom-1">&nbsp;</div>
+    <div>
+        <h1>{{ property.street_address }}</h1>
+        <h6>County: <span id="id_county">{{ property.county }}</span></h6>
+        <br>
+    </div>
+    <a href="{% url 'properties:listings' %}">Go Back</a>
+    <hr>
+    <div id="property-data">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 margin-top-1">
+                <h6>{{ property.listing_type }}</h6>
+                <h3>€{{ property.price }}</h3>
+                <hr>
+                <p>&nbsp;</p>
+                <p>{{property.description}}</p>
+                <div id="details-heading">
+                    <hr>
+                    <h5>Property Details</h5>
+                    
+                    <table>
+                        <tr>
+                            <th class="property_details_heading" width="50%">Property Type</th>
+                            <th class="property_details_heading" width="50%">BER</th>
+                        </tr>
+                        <tr>
+                            <td>{{property.property_type}}</td>
+                            <td>{{property.ber_rating}}</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <h5>Location:</h5>
+                    <div id="property-lat-lng">
+                        lat: <span id="id_latitude">{{property.latitude}}</span>
+                        lng: <span id="id_longitude">{{property.longitude}}</span>
+                    </div>
+                    <div id="mapouter">
+                        <a target="_blank" href="//www.google.com/maps?q={{property.latitude}},{{property.longitude}}" class="map-open">Open Google Maps</a>
+                        <br>
+                        <div id="map" class="google_map_canvas"></div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 margin-top-1">
+                <h5>Expense Receipts</h5>
+                <div class="table-responsive">
+        			<table class="table table-striped table-hover" style="vertical-align: top">
+        				<thead>
+        				<tr>
+        					<th scope="col">Expense</th>
+        					<th scope="col" style="width: 106px">Date</th>
+        					<th scope="col">Merchant</th>
+        					<th scope="col">Amount</th>
+        					<th scope="col">Action</th>
+        				</tr>
+        				</thead>
+        				<tbody>
+        				{% for receipt in receipts %}
+        				<tr>
+        					<td>{{ receipt.name }}</td>
+        					<td>{{ receipt.date_receipt|slice:"0:10" }}</td>
+        					<td>{{ receipt.merchant_name }}</td>
+        					<td>{{ receipt.amount_total }}</td>
+        					<td>
+                                <a href="/properties/update_receipt/{{ receipt.id }}/{{ property.id }}">Update</a>
+                                <a href="/properties/delete_receipt/{{ receipt.id }}/{{ property.id }}">Delete</a>
+                            </td>
+        				</tr>
+        				{% endfor %}
+        				</tbody>
+        			</table>
+        			<div class="text-center">
+                        <a href="/properties/create_receipt/{{ property.id }}"><button type="button" class="btn btn-orange">Add Receipt</button></a>
+                    </div>
+        		</div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+</div>
+
+{% endblock %}
+{% block scripts_bottom %}
+    <script src="{% static "js/maps/map_constants.js" %}"></script>
+    <script src="{% static "js/maps/map_load.js" %}"></script>
+    <script src="{% static "js/maps/map_prepare_property.js" %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKm2m-HpnwNxqkG7g9pyw-BpQ4Hw02hL4&callback=map_prepare_clients&v=weekly" async></script>
+{% endblock %}
