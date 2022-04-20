@@ -41,7 +41,7 @@ def create_receipt(request, propertyId):
         receipt.date_receipt = request.POST['date_receipt']
         receipt.merchant_name = request.POST['merchant_name']
         receipt.amount_total = request.POST['amount_total']
-        receipt.user = 1
+        receipt.user = propertyId
         receipt.user_email = property.agent_email
         
         #print(json.dumps(model_to_dict(receipt)))

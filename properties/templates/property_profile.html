@@ -68,6 +68,7 @@
         				</thead>
         				<tbody>
         				{% for receipt in receipts %}
+        				{% if receipt.user == property.id %}
         				<tr>
         					<td>{{ receipt.name }}</td>
         					<td>{{ receipt.date_receipt|slice:"0:10" }}</td>
@@ -78,6 +79,7 @@
                                 <a href="/properties/delete_receipt/{{ receipt.id }}/{{ property.id }}">Delete</a>
                             </td>
         				</tr>
+        				{% endif %}
         				{% endfor %}
         				</tbody>
         			</table>
